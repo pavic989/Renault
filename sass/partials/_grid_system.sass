@@ -1,0 +1,39 @@
+// #metrics
+$gap: 6.25%
+$gridsize: 12
+$breakpoints: ("small":768px,"medium": 1024px,"large": 1200px)
+
+//breakpoints
+
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+.row
+  margin-left: -(.75+$gap)
+  margin-right: -(.75+$gap)
+  &:after
+    content: " "
+    visibility: hidden
+    display: block
+    height: 0
+    clear: both
+.column
+  display: inline
+  vertical-align:baseline
+  padding-left: $gap
+  padding-right: $gap
+  float: left
+
+@for $i from 1 through $gridsize
+  .column-#{$i}
+    width:  ( $i /$gridsize ) *100% 
+
+//now the breakpoints
+@each $slug, $size in $breakpoints
+  @media (max-width: #{$size})
+    @for $i from 1 through $gridsize
+      .column-#{$slug}-#{$i}
+        width:  ( $i /$gridsize ) *100% 
